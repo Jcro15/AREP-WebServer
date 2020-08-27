@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Calculadora</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+</head>
+<h1 class="display-4" style="text-align:center">Calculadora de estadísticas</h1>
+<div class="container">
+    <h2>Ingresa los datos separados por comas</h2>
+    <div class="input-group">
+        <input type="text" class="form-control" placeholder="Datos" id="data" style="margin-bottom: 5px">
+        <button class="btn btn-primary" type="button" onclick="api.calculateStatistics()">Calcular</button>
+    </div>
+        <h5  id="media"></h5>
+
+        <h5  id="std"></h5>
+
+    <table class="table table-bordered" id="TData">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Valor</th>
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
+
+</div>
+
+<body>
+
+
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" >
+<script type="text/javascript" src="js/app.js" ></script>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+
+
+</body>
+</html>
