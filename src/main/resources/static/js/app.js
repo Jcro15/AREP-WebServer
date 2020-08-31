@@ -1,6 +1,6 @@
 var api = (function () {
-    var url='http://localhost:36000/mensajes';
-    //var url='https://arepwebserver.herokuapp.com/calcular';
+    //var url='http://localhost:36000/mensajes';
+    var url='https://arepwebserver.herokuapp.com/mensajes';
 
 
 
