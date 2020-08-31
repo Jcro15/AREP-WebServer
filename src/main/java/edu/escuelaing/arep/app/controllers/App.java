@@ -14,6 +14,13 @@ import java.util.ArrayList;
  */
 public class App 
 {
+
+    /**
+     * encargado de inicializar la aplicacion de publicacion de mensajes, utiliza un servidor http para publicar
+     * un metodo get usado para leer todos los mensajes publicados y un metodo post usado para publicar un nuevo mensaje,
+     * para esto utiliza un objeto que implementa la clase MessageService
+     * @param args
+     */
     public static void main( String[] args )
     {
         MessageService messageService= new MessageServiceImpl();

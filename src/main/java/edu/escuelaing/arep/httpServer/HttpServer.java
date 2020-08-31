@@ -11,7 +11,10 @@ public class HttpServer extends Thread {
     private static String rootPath = "src/main/resources";
     private OutputStream outputStream;
 
-
+    /**
+     * retorna el puerto por el que va a funcionar el servidor segun la variable de entorno PORT, por defecto es 36000
+     * @return el puerto por el que va a funcionar el servidor segun la variable de entorno PORT, por defecto es 36000
+     */
     private static int getPort() {
         if (System.getenv("PORT") != null) {
             return Integer.parseInt(System.getenv("PORT"));
@@ -19,10 +22,19 @@ public class HttpServer extends Thread {
         return 36000;
     }
 
+    /**
+     * establece la ruta en la que se leerán los archivos estáticos, la ruta base es src/main/resources
+     * @param path la ruta en la que se leerán los archivos estáticos relativa a la ruta base
+     */
     public static void staticFilesLocation(String path) {
         rootPath += path;
     }
 
+    /**
+     * Inicia el servidor web en un nuevo hilo,creando un socket en el puerto especificado.
+     * Permite procesar varias peticiones no concurrentes, este servidor es
+     * capaz de responder con archivos de texto de tipo html,css,javascript e imágenes de tipo png y jpg
+     */
     @Override
     public void run() {
         try {
@@ -58,6 +70,11 @@ public class HttpServer extends Thread {
         }
     }
 
+    /**
+     * Encargado de procesar las peticiones enviadas por el cliente a través del socket
+     * @param clientSocket el socket del cliente
+     * @throws IOException si hay problemas  leyendo la peticion o generando la respuesta
+     */
     private void processRequest(Socket clientSocket) throws IOException {
         outputStream=clientSocket.getOutputStream();
         BufferedReader in = new BufferedReader(
@@ -95,6 +112,12 @@ public class HttpServer extends Thread {
         outputStream.close();
     }
 
+    /**
+     * Escribe el contenido de un archivo estático almacenado en la ruta especificada
+     * @param path la ruta donde se buscara el archivo
+     * @param header el encabezado que debe tener la respuesta segun el tipo de archivo
+     * @throws IOException si el archivo no se encuentra en la ruta especificada
+     */
     private void getResource(String path, String header) throws IOException {
         PrintStream out=new PrintStream(outputStream);
         File file = new File(rootPath+path);
@@ -112,9 +135,12 @@ public class HttpServer extends Thread {
     }
 
 
-
-
-
+    /**
+     * Procesa la petición, ejecutando el endpoint necesario o retornando el archivo estático solicitado
+     * @param request la petición del cliente
+     * @param clientSocket el socket por el que se enviará la respuesta
+     * @throws IOException si ocurre algun problema al escribir la respuesta
+     */
     private void handleRequest(Request request, Socket clientSocket) throws IOException {
         Response endpointResponse=HttpMethodPublisher.execute(request);
         if (request.getPath().equals("/")) {
@@ -143,6 +169,9 @@ public class HttpServer extends Thread {
         else errorResponse();
     }
 
+    /**
+     * construye un encabezado con el código de error 404
+     */
     private void errorResponse(){
         PrintWriter out = new PrintWriter(outputStream, true);
         out.print("HTTP/1.1 404 Not Found \r\n" + "Content-type: text/html"+"\r\n\r\n");
@@ -150,6 +179,12 @@ public class HttpServer extends Thread {
         out.close();
     }
 
+    /**
+     * construye un encabezado de exito con el codigo 200 dada la extension del archivo y un booleano que determina si es una imagen
+     * @param isImage valor booleano que determina si el archivo de respuesta es una imagen o no
+     * @param extension la extension necesaria para responder
+     * @return
+     */
     private String generateHeader(boolean isImage, String extension) {
         String header = null;
         if (isImage) {

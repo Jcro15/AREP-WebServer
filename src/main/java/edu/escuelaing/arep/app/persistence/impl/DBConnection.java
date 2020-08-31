@@ -12,6 +12,9 @@ import org.bson.Document;
 import java.util.ArrayList;
 import java.util.Date;
 
+/**
+ * Implementación de la interfaz de persistencia de mensajes que utiliza una base de datos MongoDB para persistir los mensajes
+ */
 public class DBConnection implements MessagePersistence {
     public MongoClientURI uri;
     public MongoClient mongoClient;
@@ -21,7 +24,11 @@ public class DBConnection implements MessagePersistence {
                 "mongodb+srv://admin:Admin123@cluster0.n7msp.mongodb.net/Arep?retryWrites=true&w=majority");
         mongoClient = new MongoClient(uri);
     }
-    
+
+    /**
+     * almacena el mensaje en una base de datos mongoDB
+     * @param mensaje el mensaje que se va a almacenar
+     */
     @Override
     public void writeMessage(Mensaje mensaje) {
         MongoDatabase database = mongoClient.getDatabase("Arep");
@@ -32,6 +39,10 @@ public class DBConnection implements MessagePersistence {
         collection.insertOne(document);
     }
 
+    /**
+     * retorna la lista de mensajes almacenados en la base de datos MongoDB
+     * @return la lista de mensajes almacenados en la base de datos MongoDB
+     */
     @Override
     public ArrayList<Mensaje> loadMessages() {
         ArrayList<Mensaje> mensajes=new ArrayList<>();
