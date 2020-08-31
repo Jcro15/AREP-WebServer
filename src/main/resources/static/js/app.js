@@ -1,39 +1,39 @@
 var api = (function () {
+    var url='http://localhost:36000/mensajes';
+    //var url='https://arepwebserver.herokuapp.com/calcular';
 
-    function calculateStatistics (){
-        var url='http://localhost:36000/calcular';
-        //var url='https://arepwebserver.herokuapp.com/calcular';
-        var data=document.getElementById("data").value;
-        putData(data);
-        axios.post(url,data)
+
+
+    function addMessage (){
+        var mensaje=document.getElementById("mensaje").value;
+        axios.post(url,mensaje)
             .then(res => {
-                let json = JSON.parse(res.data);
-                $("#media").text("Media : "+json.media);
-                $("#std").text("Desviación estándar : "+json.std);
-
+                getMessages()
             }
         )
     }
+    function getMessages(){
 
-    function putData(data){
-        data=data.split(",")
-        $("#TData > tbody").empty();
-        $("#media").empty();
-        $("#std").empty();
-        for(i=0;i<data.length;i++){
-            $("#TData > tbody").append(
-                "<tr>" +
-                " <td>" + (i+1) + "</td>" +
-                "<td>" + data[i] + "</td> " +
-                "</tr>"
-            );
-        }
+        $("#TMensajes > tbody").empty();
+        axios.get(url).then(res=>{
+            console.log(res.data)
+            res.data.map(mensaje=>{
+                console.log(mensaje)
+                $("#TMensajes > tbody").append(
+                    "<tr>" +
+                    " <td>" + mensaje.mensaje + "</td>" +
+                    "<td>" + mensaje.fecha + "</td> " +
+                    "</tr>"
+                );
+            })
+        })
     }
 
 
 
 
     return {
-        calculateStatistics : calculateStatistics
+        addMessage : addMessage,
+        getMessages:getMessages
     };
 })();

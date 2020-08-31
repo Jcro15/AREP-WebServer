@@ -2,26 +2,29 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Calculadora</title>
+    <title>Mensajes</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 </head>
-<h1 class="display-4" style="text-align:center">Calculadora de estadísticas</h1>
+
+
+<body onload="api.getMessages()">
+<h1 class="display-4" style="text-align:center">Publica tus mensajes!</h1>
 <div class="container">
-    <h2>Ingresa los datos separados por comas</h2>
+    <h2>Ingresa el mensaje que deseas publicar</h2>
     <div class="input-group">
-        <input type="text" class="form-control" placeholder="Datos" id="data" style="margin-bottom: 5px">
-        <button class="btn btn-primary" type="button" onclick="api.calculateStatistics()">Calcular</button>
+        <input type="text" class="form-control" placeholder="Mensaje" id="mensaje" style="margin-bottom: 5px">
+        <button class="btn btn-primary" type="button" onclick="api.addMessage()">Publicar</button>
     </div>
-        <h5  id="media"></h5>
+    <h5  id="media"></h5>
 
-        <h5  id="std"></h5>
+    <h5  id="std"></h5>
 
-    <table class="table table-bordered" id="TData">
+    <table class="table table-bordered" id="TMensajes">
         <thead class="thead-dark">
         <tr>
-            <th scope="col">#</th>
-            <th scope="col">Valor</th>
+            <th scope="col">Mensaje</th>
+            <th scope="col">Fecha del mensaje</th>
         </tr>
         </thead>
         <tbody>
@@ -30,8 +33,6 @@
 
 
 </div>
-
-<body>
 
 
 

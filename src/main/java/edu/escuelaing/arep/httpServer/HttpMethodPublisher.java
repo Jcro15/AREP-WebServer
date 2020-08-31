@@ -1,9 +1,8 @@
-package edu.escuelaing.arep;
+package edu.escuelaing.arep.httpServer;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.BiFunction;
-import com.google.gson.Gson;
 
 
 public class HttpMethodPublisher {
