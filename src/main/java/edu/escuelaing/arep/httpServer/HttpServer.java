@@ -98,12 +98,16 @@ public class HttpServer extends Thread {
                 break;
             }
         }
-        if(request.getMethod().equals("POST")){
-            StringBuilder payload = new StringBuilder();
-            while(in.ready()){
-                payload.append((char) in.read());
+
+        if (request.getMethod().equals("POST")) {
+            StringBuilder body = new StringBuilder();
+            int content = 0;
+            int contentLenght = Integer.parseInt(request.getHeader("Content-Length").trim());
+            for (int i = 0; i < contentLenght  ; i++) {
+                content = in.read();
+                body.append((char) content);
             }
-            request.setBody(payload.toString());
+            request.setBody(body.toString());
         }
         if(!request.getMethod().equals("")){
             handleRequest(request, clientSocket);
