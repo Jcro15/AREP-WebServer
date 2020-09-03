@@ -12,7 +12,7 @@ archivos de texto de extension js,html y css. Adicionalmente permite la publicac
  sencilla que utiliza los servicios del servidor  en la que los usuarios pueden publicar mensaje y ver los mensajes que se han publicado anteriormente
  para la persistencia de los mensajes se utiliza una base de datos MongoDB .
  
- Los detalles de arquitectura se pueden encontrar en el documento de diseño  
+ Los detalles de arquitectura se pueden encontrar en el documento de diseño  [Arquitectura.pdf](Arquitectura.pdf)
 ## Pre-requisitos
 * [Maven](https://maven.apache.org/) - Administrador de dependencias
 * [Git](https://git-scm.com/) - Sistema de control de versiones
@@ -43,6 +43,25 @@ en src/main/resources/static/js/app.js
 
 ## Enlace Heroku
   [Despliegue en Heroku](https://arepwebserver.herokuapp.com/)
+  
+## Pruebas
+Para probar la aplicación se pueden publicar nuevos mensajes en la aplicación, esto 
+hará un Post seguido de un Get, este comportamiento se puede verificar observando
+el comportamiento de la red con las herramientas de desarrollador del navegador.
+
+También se pueden realizar pruebas desde Postman como se ve a continuación
+### Test POST
+
+![test1](resources/test2.jpg)
+
+### Test GET
+![test2](resources/test3.jpg)
+
+Otros recursos que se pueden consultar son :
+* /index.html
+* /logoesc.png
+* /style.css
+* /js/app.js
 
 ## Construido con
 
